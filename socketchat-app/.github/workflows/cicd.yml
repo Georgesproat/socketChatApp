@@ -2,16 +2,14 @@ name: CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version:
-          - 19.x
+        node-version: [19.x]
 
     steps:
       - name: Checkout repository
@@ -44,7 +42,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mvc-structure:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/socket-chat-app:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
